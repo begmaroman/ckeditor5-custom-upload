@@ -1,12 +1,12 @@
-## S3 Image Upload Plugin for Ckeditor5
+## Custom Image Upload Plugin for Ckeditor5
 
-This is an adapter, that sallows your plugin to upload images directly to Amazon S3 bucket.
+This is an adapter, that allows you to handle image uploading by yourselves.
 
 ### Build Integration
 
 https://docs.ckeditor.com/ckeditor5/latest/builds/guides/development/custom-builds.html
 
-`npm install begmaroman/ckeditor5-s3-upload`
+`npm install begmaroman/ckeditor5-custom-upload`
 
 Add this plugin and remove the ckfinder and easyimage plugins
 
@@ -23,7 +23,7 @@ module.exports = {
     //'@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter',
     //'@ckeditor/ckeditor5-easy-image/src/easyimage',
 
-    "ckeditor5-sss-upload/src/s3upload"
+    "ckeditor5-custom-upload"
 
     // ...
   ],
@@ -54,31 +54,12 @@ module.exports = {
 
 ```javascript
 ClassicEditor.create(document.querySelector("#editor"), {
-  s3Upload: {
-    policyUrl: "http://127.0.0.1/my-upload-endpoint",
-    mapUrl: ({ location, bucket, key }) => {
-      return location;
+  customUpload: {
+    upload: (file, cb) => {
+      // Some logic with file uploading here.
+      // const fileURL = <uploaded file url>
+      return fileURL;
     }
   }
 });
-```
-
-### Backend
-
-The endpoint will receive a filename as a query parameter, and will need to respond with s3 credentials JSON in the following format.
-
-```json
-{
-    "endpoint_url": " ... ",
-    "params": {
-        "key": " ... ",
-        "acl": " ... ",
-        "success_action_status": " ... ",
-        "policy": " ... ",
-        "x-amz-algorithm": " ... ",
-        "x-amz-credential": " ... ",
-        "x-amz-date": " ... ",
-        "x-amz-signature": " ... "
-    }
-}
 ```
