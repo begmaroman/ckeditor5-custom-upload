@@ -1,0 +1,33 @@
+{
+  "name": "ckeditor5-s3-upload",
+  "version": "1.0.0",
+  "description": "Standard S3 image uploader plugin for ckeditor5",
+  "keywords": [
+    "amazon",
+    "aws",
+    "s3",
+    "ckeditor5",
+    "image",
+    "s3"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/begmaroman/ckeditor5-s3-upload.git"
+  },
+  "files": [
+    "src",
+    "theme"
+  ],
+  "main": "./src/s3upload.js",
+  "author": "begmaroman@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@ckeditor/ckeditor5-core": "^10.0.0",
+    "@ckeditor/ckeditor5-engine": "^10.0.0",
+    "@ckeditor/ckeditor5-upload": "^10.0.0"
+  },
+  "devDependencies": {
+    "@ckeditor/ckeditor5-editor-classic": "^10.0.0",
+    "@ckeditor/ckeditor5-utils": "^10.0.0"
+  }
+}
