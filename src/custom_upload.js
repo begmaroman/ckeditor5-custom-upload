@@ -13,14 +13,12 @@ export default class CustomUpload extends Plugin {
     }
 
     init() {
-        const upload = this.editor.config.get('customUpload.upload');
-        if (!upload || typeof upload !== "function") {
-            console.warn('s3Upload.upload is not configured')
+        const customUpload = this.editor.config.get('customUpload');
+        if (!customUpload || !customUpload.upload) {
+            console.warn('customUpload.upload is not configured')
             return;
         }
 
-        const abort = this.editor.config.get('customUpload.abort');
-
-        this.editor.plugins.get('FileRepository').createUploadAdapter = loader => new Adapter(loader, upload, abort);
+        this.editor.plugins.get('FileRepository').createUploadAdapter = loader => new Adapter(loader, customUpload.upload, customUpload.abort);
     }
 }
