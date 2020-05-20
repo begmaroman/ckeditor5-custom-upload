@@ -1,12 +1,20 @@
 export default class Adapter {
-    constructor(loader, getCredentials, upload, abort) {
+    constructor(loader, upload, abort) {
         this.loader = loader;
         this.uploadResource = upload;
         this.abortUploading = abort || (() => {});
     }
 
     upload() {
-        this.loader.file.then(file => this.uploadResource(file));
+        return this.loader.file.then(file => new Promise((resolve, reject) => {
+            this.uploadResource(file, (url) => {
+                if (!url || url.length === 0) {
+                    reject("Failed to upload resource")
+                }
+
+                resolve({default: url})
+            })
+        }))
     }
 
     abort () {
